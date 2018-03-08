@@ -1,0 +1,8 @@
+<div>
+  <app-meel-time *ngFor="let mealTime of mealTimes"
+                 [mealTime]="mealTime"
+                 [courses]="day[mealTime.type]"
+                 (updateCourses)="updateCourses($event)"
+  >
+  </app-meel-time>
+</div>

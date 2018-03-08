@@ -1,0 +1,23 @@
+<div class="course">
+
+  <button mat-icon-button>
+    <mat-icon>
+      <i class="material-icons" (click)="changeForBabyFlag()">{{course.forBaby ? 'child_care' : 'person'}}</i>
+    </mat-icon>
+  </button>
+
+  <mat-form-field class="input">
+    <input matInput placeholder="Еда" [formControl]="nameControl" [matAutocomplete]="auto">
+    <mat-autocomplete #auto="matAutocomplete">
+      <mat-option *ngFor="let option of filteredOptions | async" [value]="option">
+        {{ option }}
+      </mat-option>
+    </mat-autocomplete>
+  </mat-form-field>
+
+  <button mat-icon-button>
+    <mat-icon>
+      <i class="material-icons" (click)="remove.emit(index)">close</i>
+    </mat-icon>
+  </button>
+</div>

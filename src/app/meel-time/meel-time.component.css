@@ -1,0 +1,18 @@
+.card {
+  margin: 10px;
+}
+
+.header {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: baseline;
+}
+
+.name {
+  font-size: 18px;
+  font-weight: bold;
+  width: 40%;
+}
+
+

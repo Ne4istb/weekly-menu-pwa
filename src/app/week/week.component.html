@@ -1,0 +1,11 @@
+<div>
+  <mat-form-field class="day-select">
+    <mat-select  placeholder="День недели" [(ngModel)]="selectedDay">
+      <mat-option *ngFor="let day of days" [value]="day.value">
+        {{ day.viewValue }}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+
+  <app-day [day]="week[selectedDay] || getDefaultDay()" (update)="updateSelectedDay($event)"></app-day>
+</div>
