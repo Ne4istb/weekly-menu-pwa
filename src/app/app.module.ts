@@ -43,10 +43,10 @@ import {LocalStorageService, NgxLocalStorageModule} from 'ngx-localstorage';
     MatAutocompleteModule,
     ReactiveFormsModule,
     FormsModule,
-    NgxLocalStorageModule.forRoot(),
+    NgxLocalStorageModule.forRoot({prefix: 'weeklyMenu'}),
     ServiceWorkerModule.register('/ngsw-worker.js', {enabled: environment.production})
   ],
-  providers: [MenuService, RecommendationService, LocalStorageService],
+  providers: [MenuService, RecommendationService],
   bootstrap: [AppComponent]
 })
 export class AppModule {
