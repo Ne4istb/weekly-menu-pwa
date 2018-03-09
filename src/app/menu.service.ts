@@ -5,12 +5,13 @@ import {LocalStorageService} from 'ngx-localstorage';
 @Injectable()
 export class MenuService {
 
+  private key = 'menu';
   constructor(private storageService: LocalStorageService) {
   }
 
   getMenu(): Menu {
 
-    const menu = JSON.parse(this.storageService.get('menu'));
+    const menu = JSON.parse(this.storageService.get(this.key));
 
     return menu || {
       current: null,
@@ -21,6 +22,6 @@ export class MenuService {
 
   save(menu: Menu) {
     console.log('menu', menu);
-    this.storageService.set('menu', JSON.stringify(menu));
+    this.storageService.set(this.key, JSON.stringify(menu));
   }
 }

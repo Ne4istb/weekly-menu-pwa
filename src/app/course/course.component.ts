@@ -2,7 +2,7 @@ import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {Course} from '../models';
 import {Observable} from 'rxjs/Observable';
 import {FormControl} from '@angular/forms';
-import {map, startWith} from 'rxjs/operators';
+import {combineLatest} from 'rxjs/operators';
 import {RecommendationService} from '../recommendation.service';
 
 @Component({
@@ -18,10 +18,9 @@ export class CourseComponent implements OnInit {
   @Output() update = new EventEmitter();
   @Output() remove = new EventEmitter();
 
+  private options = this.recommendationService.recommendations$;
+
   nameControl: FormControl = new FormControl();
-
-  options = this.recommendationService.getReccomendations();
-
   filteredOptions: Observable<string[]>;
 
   constructor(private recommendationService: RecommendationService) {
@@ -35,14 +34,14 @@ export class CourseComponent implements OnInit {
     const nameChanges$ = this.nameControl.valueChanges;
 
     this.filteredOptions = nameChanges$
-      .pipe(map(val => this.filter(val)));
+      .pipe(combineLatest(this.options, this.filter));
 
     nameChanges$.subscribe(value => this.onNameChanged(value));
   }
 
-  filter(val: string): string[] {
-    if (val.length < 3) return [];
-    return this.options.filter(option => option.toLowerCase().includes(val.toLowerCase()));
+  filter(value: string, options: string[]): string[] {
+    if (value.length < 3) return [];
+    return options.filter(option => option.toLowerCase().includes(value.toLowerCase()));
   }
 
   changeForBabyFlag() {
@@ -56,7 +55,13 @@ export class CourseComponent implements OnInit {
 
   private onNameChanged(value) {
     this.course.name = value;
+  }
+
+  onBlur() {
+    if (!this.course.name) return;
+
     this.save();
+    this.recommendationService.addRecommendation(this.course.name);
   }
 }
 
