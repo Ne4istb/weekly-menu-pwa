@@ -21,6 +21,7 @@ import {MenuService} from './menu.service';
 import {Menu} from './models';
 import {RecommendationService} from './recommendation.service';
 import {LocalStorageService, NgxLocalStorageModule} from 'ngx-localstorage';
+import {HttpClientModule} from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -32,6 +33,7 @@ import {LocalStorageService, NgxLocalStorageModule} from 'ngx-localstorage';
   ],
   imports: [
     BrowserModule,
+    HttpClientModule,
     BrowserAnimationsModule,
     MatTabsModule,
     MatFormFieldModule,

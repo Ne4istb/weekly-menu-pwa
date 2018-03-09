@@ -1,9 +1,7 @@
 <div class="course">
 
   <button mat-icon-button>
-    <mat-icon>
-      <i class="material-icons" (click)="changeForBabyFlag()">{{course.forBaby ? 'child_care' : 'person'}}</i>
-    </mat-icon>
+    <mat-icon (click)="changeForBabyFlag()" [svgIcon]="course.forBaby ? 'child' : 'person'"></mat-icon>
   </button>
 
   <mat-form-field class="input">
@@ -17,8 +15,6 @@
   </mat-form-field>
 
   <button mat-icon-button>
-    <mat-icon>
-      <i class="material-icons" (click)="remove.emit(index)">close</i>
-    </mat-icon>
+    <mat-icon (click)="remove.emit(index)" svgIcon="close"></mat-icon>
   </button>
 </div>
